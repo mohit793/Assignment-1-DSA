@@ -1,0 +1,100 @@
+import java.util.Scanner;
+
+public class BrowserHistoryStack {
+
+    static int MAX = 5;
+    static String[] stack = new String[MAX];
+    static int top = -1;
+
+    // Push operation
+    static void push(String url) {
+        if (top == MAX - 1) {
+            System.out.println("Stack Overflow! History is full.");
+        } else {
+            top++;
+            stack[top] = url;
+            System.out.println("Visited: " + url);
+        }
+    }
+
+    // Pop operation
+    static void pop() {
+        if (top == -1) {
+            System.out.println("Stack Underflow! No history available.");
+        } else {
+            System.out.println("Going back from: " + stack[top]);
+            top--;
+        }
+    }
+
+    // Peek operation
+    static void peek() {
+        if (top == -1) {
+            System.out.println("History is empty.");
+        } else {
+            System.out.println("Current page: " + stack[top]);
+        }
+    }
+
+    // Display operation
+    static void display() {
+        if (top == -1) {
+            System.out.println("History is empty.");
+        } else {
+            System.out.println("Browser History:");
+            for (int i = top; i >= 0; i--) {
+                System.out.println(stack[i]);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\n--- Browser History using Stack ---");
+            System.out.println("1. Push (Visit Page)");
+            System.out.println("2. Pop (Back)");
+            System.out.println("3. Peek (Current Page)");
+            System.out.println("4. Display History");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+
+            choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+
+                case 1:
+                    System.out.print("Enter URL: ");
+                    String url = sc.nextLine();
+                    push(url);
+                    break;
+
+                case 2:
+                    pop();
+                    break;
+
+                case 3:
+                    peek();
+                    break;
+
+                case 4:
+                    display();
+                    break;
+
+                case 5:
+                    System.out.println("Program ended.");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } while (choice != 5);
+
+        sc.close();
+    }
+}A
